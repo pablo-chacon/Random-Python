@@ -1,29 +1,37 @@
 #!/usr/bin/env python3
 
+
 # Educational script for Web server footprinting.
+# Loop through URL:s in txt file, store in dict.
+# Write dict data to CSV file.
+
 
 # Author: __ekarlsson66@gmail.com__
 # Date: __2021-06-18__
-# Version: __001__
+# Version: __002__
 
-"""Footprint tool in Python. Get data from web servers output in a dict."""
+
+"""Footprint tool in Python. Get Footprints from web servers stored in txt-file,
+save data in a CSV-file with timestamp."""
 
 
 import requests
-import datetime as dt
+import csv
+from datetime import datetime as dt
 
 def fetch():
 
-	urls = open("urls.txt", "r") # URL list
-	
-	# Itterate over URL:s and output headers as a dict.
+	urls = open("urls.txt", "r")
+	timestamp = str(dt.now())
 	for url in urls:
+		
 		url = url.strip()
-		print("Footprint report for " + url + " Web server: ")
 		req = requests.get(url)
 		result = dict(req.headers)
 
-		for item, value in result.items():
-			print(item+" : "+value+"\n")
+		with open(timestamp + '_report.csv', 'w') as f:
+			for item, value in result.items():
+				f.write(item + " : " + value + "\n")
+
 
 
