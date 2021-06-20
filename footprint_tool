@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+# Educational script for Web server footprinting.
+
+# Author: __ekarlsson66@gmail.com__
+# Date: __2021-06-18__
+# Version: __001__
+
+"""Footprint tool in Python. Get data from web servers output in a dict."""
+
+
+import requests
+import datetime as dt
+
+def fetch():
+
+	urls = open("urls.txt", "r") # URL list
+	
+	# Itterate over URL:s and output headers as a dict.
+	for url in urls:
+		url = url.strip()
+		print("Footprint report for " + url + " Web server: ")
+		req = requests.get(url)
+		result = dict(req.headers)
+
+		for item, value in result.items():
+			print(item+" : "+value+"\n")
+
+
