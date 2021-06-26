@@ -4,28 +4,35 @@
 
 
 # Author: __ekarlsson66@gmail.com__
-# Date: __2021_06_24__
+# Date: __2021_06_26__
 # Version: __002__
 
 
   """Define length of list with integer, define numbers in list integers only. 
-Sort numbers in list. Output sorted list or ValueError."""
+Sort numbers in list. Output sorted list or ValueError.Let End User retry in case of invalid input"""
 
 
 empty_list = []
 
-	
-try:
-	times = int(input("List length :"))
 
-	while times >= 0:	
-		number = int(input("Enter a number: "))
-		empty_list.append(number)
-		times = times - 1
+def usr_sort():	
+	# Evaluate End User input and append valid values to list.
+	try:
+		times = int(input("List length :"))
+
+		while times >= 0:	
+			number = int(input("Enter a number: "))
+			empty_list.append(number)
+			times = times - 1
 		
-		if times == 0:			
-			print(sorted(empty_list))
-			break
+			if times == 0:			
+				print(sorted(empty_list))
+				break
 
-except ValueError:
-	print(number, "isn't a valid number. Try harder.")	
+	except ValueError:
+		print(number, "isn't a valid number. Try again.")
+		usr_sort()
+
+
+
+
